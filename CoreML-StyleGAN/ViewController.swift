@@ -7,11 +7,13 @@
 
 import UIKit
 import CoreML
+import Lottie
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var btnPremiumOutlet: UIButton!
+    @IBOutlet weak var premiumLottieView: UIView!
     
     // For save image
     var outputImage: UIImage?
@@ -25,6 +27,33 @@ class ViewController: UIViewController {
         self.runMobileStyleGAN()
         
         IAPViewModel.shared.receiptValidation(isLoader: false)
+        self.animationSetup()
+    }
+    
+    private func animationSetup() {
+        
+        let premiumAnimViewSubView: LottieAnimationView = LottieAnimationView()
+        
+        premiumAnimViewSubView.animation = LottieAnimation.named("Premium")
+        premiumAnimViewSubView.loopMode = .loop
+        premiumAnimViewSubView.translatesAutoresizingMaskIntoConstraints = false // Disable autoresizing mask
+        premiumAnimViewSubView.frame = self.premiumLottieView.bounds
+        premiumAnimViewSubView.contentMode = .scaleAspectFit
+
+        if premiumAnimViewSubView.superview == nil {
+            self.premiumLottieView.addSubview(premiumAnimViewSubView)
+
+            // Center aiAnimSubView within aiAnimView
+            NSLayoutConstraint.activate([
+                premiumAnimViewSubView.centerXAnchor.constraint(equalTo: premiumLottieView.centerXAnchor),
+                premiumAnimViewSubView.centerYAnchor.constraint(equalTo: premiumLottieView.centerYAnchor),
+                premiumAnimViewSubView.widthAnchor.constraint(equalTo: premiumLottieView.widthAnchor), // Optional: Match width
+                premiumAnimViewSubView.heightAnchor.constraint(equalTo: premiumLottieView.heightAnchor) // Optional: Match height
+            ])
+        }
+
+        // Optionally restart the animation
+        premiumAnimViewSubView.play()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -72,7 +101,13 @@ class ViewController: UIViewController {
             guard let safeCGImage = ciContext.createCGImage(ciImage, from: ciImage.extent) else { print("Could not create cgimage."); return}
             let image = UIImage(cgImage: safeCGImage)
             
-            imageView.image = image
+            UIView.transition(with: imageView,
+                              duration: 0.5, // Animation duration
+                              options: .transitionCrossDissolve, // Smooth fade effect
+                              animations: {
+                self.imageView.image = image
+            },
+                              completion: nil)
             outputImage = image
             
         } catch let error {

@@ -13,10 +13,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        #if targetEnvironment(macCatalyst)
+        if let sizeRestrictions = windowScene.sizeRestrictions {
+            
+            // Reduced size by 10% (scaled down)
+            let fixedHeight: CGFloat = 864 * 1.2  // 90% of the original width
+            let fixedWidth: CGFloat = fixedHeight * 3 / 4  // Maintain 4:3 aspect ratio
+            
+            let fixedSize = CGSize(width: fixedWidth, height: fixedHeight)
+            
+            print("fixedSize: ",fixedSize)
+            sizeRestrictions.minimumSize = fixedSize
+            sizeRestrictions.maximumSize = fixedSize
+        }
+        
+        #endif
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

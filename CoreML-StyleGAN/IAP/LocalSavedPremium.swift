@@ -14,7 +14,7 @@ struct LocalSavedPremium {
         
         let defaults = UserDefaults.standard
         
-        if let data = defaults.data(forKey: "premium") {
+        if let data = defaults.data(forKey: "premium2") {
             
             let array = try! PropertyListDecoder().decode([Premium].self, from: data)
             complition(array)
@@ -24,7 +24,7 @@ struct LocalSavedPremium {
     static func save(_ premium: [Premium]) {
         
         if let data = try? PropertyListEncoder().encode(premium) {
-            UserDefaults.standard.set(data, forKey: "premium")
+            UserDefaults.standard.set(data, forKey: "premium2")
         }
     }
     

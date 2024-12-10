@@ -12,15 +12,13 @@ import SwiftyStoreKit
 
 class PremiumTVC: UITableViewCell {
     
-    @IBOutlet weak var radioImg: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var descPriceLbl: UILabel!
+    @IBOutlet weak var priceLbl: UILabel!
+    @IBOutlet weak var durationLbl: UILabel!
     @IBOutlet weak var discountLbl: UILabel!
-    @IBOutlet weak var trialView: UIView!
     @IBOutlet weak var mainView: UIView!
-    @IBOutlet weak var cutPrice: UILabel!
-    @IBOutlet weak var cutView: UIView!
-    @IBOutlet weak var offView: UIView!
+    @IBOutlet weak var bgImgView: UIImageView!
 }
 
 struct Premium: Codable {
@@ -35,11 +33,11 @@ struct Premium: Codable {
 
 class IAPVC: UIViewController {
     
-//    @IBOutlet weak var sliderCV: UICollectionView!
+    //    @IBOutlet weak var sliderCV: UICollectionView!
     @IBOutlet weak var premTV: UITableView!
     @IBOutlet weak var btnBuyOutlet: UIButton!
     @IBOutlet weak var freeTrialLbl: UILabel!
-        
+    
     private var productsArr: [Premium]? {
         
         didSet {
@@ -66,56 +64,58 @@ class IAPVC: UIViewController {
         self.tvSetup()
         self.getProducts()
     }
-
+    
     private func getProducts() {
-          
-          LocalSavedPremium.get { premiums in
-              
-              self.productsArr = premiums
-          }
-          
-          DispatchQueue.main.async {
-              
-              SwiftyStoreKit.retrieveProductsInfo(PremiumProducts.productIDs) { result in
-                  
-                  print(result)
-                  
-                  if result.error != nil {
-                      self.showAlert(message: "Something Went wrong!", okayTitle: "Ok", cancelCall: {
-                          self.dismiss(animated: true)
-                      })
-                      return
-                  }
-                  
-                  let products = result.retrievedProducts
-                  
-                  var productsFormated = [Premium]()
-                  
-                  if let prodWeekly = products.first(where: {$0.productIdentifier == PremiumProducts.weeklySub}) {
-                      productsFormated.append(Premium(title: prodWeekly.localizedTitle, priceDesc: prodWeekly.localizedPrice, currancy: prodWeekly.priceLocale.currencySymbol, productID: prodWeekly.productIdentifier, price: prodWeekly.price.floatValue, isSelected: false))
-                  }
-                  
-                  if let prodMonthly = products.first(where: {$0.productIdentifier == PremiumProducts.monthlySub}) {
-                      productsFormated.append(Premium(title: prodMonthly.localizedTitle, priceDesc: prodMonthly.localizedPrice, currancy: prodMonthly.priceLocale.currencySymbol, productID: prodMonthly.productIdentifier, price: prodMonthly.price.floatValue, isSelected: true))
-                      self.btnBuyOutlet.setTitle("Start for Free", for: .normal)
-                      self.freeTrialLbl.text =  "3 days Free trial - then pay \(prodMonthly.localizedPrice ?? "")/month"
-                  }
-                  
-                  if let prodYearly = products.first(where: {$0.productIdentifier == PremiumProducts.yearlySub}) {
-                      productsFormated.append(Premium(title: prodYearly.localizedTitle, priceDesc: prodYearly.localizedPrice, currancy: prodYearly.priceLocale.currencySymbol, productID: prodYearly.productIdentifier, price: prodYearly.price.floatValue, isSelected: false))
-                  }
-                  
-                  print(self.productsArr as Any)
-                  
-                  if self.productsArr?.count == 0 || self.productsArr == nil {
-                      
-                      self.productsArr = productsFormated
-                  }
-
-                  LocalSavedPremium.save(productsFormated)
-              }
-          }
-      }
+        
+        LocalSavedPremium.get { premiums in
+            
+            self.productsArr = premiums
+        }
+        
+        DispatchQueue.main.async {
+            
+            SwiftyStoreKit.retrieveProductsInfo([PremiumProducts.weeklySub,PremiumProducts.yearlySub]) { result in
+                
+                print(result)
+                
+                if result.error != nil {
+                    self.showAlert(message: "Something Went wrong!", okayTitle: "Ok", cancelCall: {
+                        self.dismiss(animated: true)
+                    })
+                    return
+                }
+                
+                let products = result.retrievedProducts
+                
+                var productsFormated = [Premium]()
+                
+                if let prodWeekly = products.first(where: {$0.productIdentifier == PremiumProducts.weeklySub}) {
+                    productsFormated.append(Premium(title: prodWeekly.localizedTitle, priceDesc: prodWeekly.localizedPrice, currancy: prodWeekly.priceLocale.currencySymbol, productID: prodWeekly.productIdentifier, price: prodWeekly.price.floatValue, isSelected: false))
+                }
+                
+                if let prodYearly = products.first(where: {$0.productIdentifier == PremiumProducts.yearlySub}) {
+                    productsFormated.append(Premium(title: prodYearly.localizedTitle, priceDesc: prodYearly.localizedPrice, currancy: prodYearly.priceLocale.currencySymbol, productID: prodYearly.productIdentifier, price: prodYearly.price.floatValue, isSelected: true))
+                    self.btnBuyOutlet.setTitle("Start for Free", for: .normal)
+                    UIView.transition(with: self.freeTrialLbl,
+                                      duration: 0.5, // Animation duration
+                                      options: .transitionCrossDissolve, // Smooth fade effect
+                                      animations: {
+                        self.freeTrialLbl.text = "3 days Free trial - then pay \(prodYearly.localizedPrice ?? "")/year"
+                    },
+                                      completion: nil)
+                }
+                
+                print(self.productsArr as Any)
+                
+                if self.productsArr?.count == 0 || self.productsArr == nil {
+                    
+                    self.productsArr = productsFormated
+                }
+                
+                LocalSavedPremium.save(productsFormated)
+            }
+        }
+    }
     
     @IBAction func btnBuy() {
         
@@ -129,7 +129,7 @@ class IAPVC: UIViewController {
     }
     
     @IBAction func btnPrivacy() {
-
+        
         if #available(iOS 10.0, *) {
             UIApplication.shared.open(URL.privacy(), options: [:], completionHandler: nil)
         } else {
@@ -155,14 +155,14 @@ class IAPVC: UIViewController {
         
         self.dismiss(animated: true)
     }
-
+    
 }
 
 // IAP Work
 extension IAPVC {
     
     private func purchaseItem() {
-
+        
         self.showLoader()
         
         guard let prodID = self.productsArr?.first(where: {$0.isSelected == true})?.productID else {
@@ -245,6 +245,7 @@ extension IAPVC {
                     IAPViewModel.shared.isPurchased = true
                     
                     self.dismiss(animated: true) {
+                        
                         IAPViewModel.shared.receiptValidation(isLoader: false)
                     }
                 }, cancelCall:  {
@@ -283,49 +284,27 @@ extension IAPVC: UITableViewDelegate, UITableViewDataSource {
         
         let currentProduct = self.productsArr?[indexPath.row]
         cell.titleLbl.text = currentProduct?.title
-        cell.descPriceLbl.text = currentProduct?.priceDesc
-        cell.offView.isHidden = true
-        cell.cutView.isHidden = true
-        
-        let currentPrice = currentProduct?.price?.rounded() ?? 0
-        
-        if currentProduct?.productID == PremiumProducts.monthlySub {
+                
+        if currentProduct?.productID == PremiumProducts.weeklySub {
             
-            cell.cutView.isHidden = false
-            cell.offView.isHidden = false
-            
-            cell.cutPrice.text = "(\(currentProduct?.currancy ?? "") \(Int(currentPrice+(currentPrice*0.60))))"
-            
-            cell.discountLbl.text = "60%"
+            cell.priceLbl.text = "\(currentProduct?.currancy ?? "") \(((currentProduct?.price ?? 0.0)/7).rounded(toPlaces: 1))"
+            cell.durationLbl.text = "per day"
+            cell.descPriceLbl.text = (currentProduct?.priceDesc ?? "") + " paid weekly"
+            cell.discountLbl.text = "Save 60%"
         } else if currentProduct?.productID == PremiumProducts.yearlySub {
             
-            cell.cutView.isHidden = false
-            cell.offView.isHidden = false
-            
-            cell.cutPrice.text = "(\(currentProduct?.currancy ?? "") \(Int(currentPrice+(currentPrice*0.70))))"
-            
-            cell.discountLbl.text = "70%"
-        }
-        
-        if currentProduct?.productID == PremiumProducts.monthlySub {
-            
-            cell.trialView.isHidden = false
-        } else {
-            
-            cell.trialView.isHidden = true
+            cell.priceLbl.text = "\(currentProduct?.currancy ?? "") \(((currentProduct?.price ?? 0.0)/12).rounded(toPlaces: 1))"
+            cell.durationLbl.text = "per month"
+            cell.descPriceLbl.text = (currentProduct?.priceDesc ?? "") + " paid yearly"
+            cell.discountLbl.text = "Save 70%"
         }
         
         if currentProduct?.isSelected == true {
             
-            cell.mainView.backgroundColor = UIColor(named: "purple")?.withAlphaComponent(0.1)
-            cell.mainView.layer.borderColor = UIColor(named: "purple")?.cgColor
-            cell.mainView.layer.borderWidth = 1
-            cell.radioImg.image = UIImage(named: "selected")
+            cell.bgImgView.image = UIImage(resource: .selectedPlanBG)
         } else {
             
-            cell.mainView.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
-            cell.mainView.layer.borderColor = UIColor.clear.cgColor
-            cell.radioImg.image = UIImage(named: "notSelected")
+            cell.bgImgView.image = UIImage(resource: .unselectedPlanBG)
         }
         
         return cell
@@ -339,14 +318,22 @@ extension IAPVC: UITableViewDelegate, UITableViewDataSource {
         self.productsArr?[indexPath.row].isSelected = true
         self.premTV.reloadData()
         
-//        self.btnBuyOutlet.setTitle("Continue", for: .normal)
+        //        self.btnBuyOutlet.setTitle("Continue", for: .normal)
         
-        if self.productsArr?[indexPath.row].productID == PremiumProducts.monthlySub {
+        if self.productsArr?[indexPath.row].productID == PremiumProducts.yearlySub {
             
             self.btnBuyOutlet.setTitle("Start for Free", for: .normal)
             self.freeTrialLbl.isHidden = false
             print("3day")
-            self.freeTrialLbl.text = "3 Days Free Trial - then Pay \(self.productsArr?[prevIndex].priceDesc ?? "0")/month"
+            
+            UIView.transition(with: self.freeTrialLbl,
+                              duration: 0.5, // Animation duration
+                              options: .transitionCrossDissolve, // Smooth fade effect
+                              animations: {
+                self.freeTrialLbl.text = "3 days Free trial - then pay \(self.productsArr?[indexPath.row].priceDesc ?? "0")/year"
+            },
+                              completion: nil)
+            
         } else {
             
             self.btnBuyOutlet.setTitle("Continue", for: .normal)

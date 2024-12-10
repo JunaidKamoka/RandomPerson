@@ -20,6 +20,9 @@
 		737BBCEA277815FF007A38F3 /* synthesisNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737BBCE8277815FF007A38F3 /* synthesisNetwork.swift */; };
 		737BBCED27781629007A38F3 /* mappingNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737BBCEB27781628007A38F3 /* mappingNetwork.swift */; };
 		737BBCEE27781629007A38F3 /* mappingNetwork.mlmodelc in Resources */ = {isa = PBXBuildFile; fileRef = 737BBCEC27781628007A38F3 /* mappingNetwork.mlmodelc */; };
+		FA2B48432D088AD90022B3CE /* Float+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B48422D088AD10022B3CE /* Float+Ext.swift */; };
+		FA2B48462D088FD50022B3CE /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FA2B48452D088FD50022B3CE /* Lottie */; };
+		FA2B48482D08905A0022B3CE /* Premium.json in Resources */ = {isa = PBXBuildFile; fileRef = FA2B48472D08905A0022B3CE /* Premium.json */; };
 		FA88D8442CE4E51E00625AA6 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA88D8432CE4E51E00625AA6 /* ImageSaver.swift */; };
 		FAB8A8072C6BD0A4005F683B /* IAPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB8A8032C6BD0A4005F683B /* IAPViewModel.swift */; };
 		FAB8A8082C6BD0A4005F683B /* PremiumProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB8A8042C6BD0A4005F683B /* PremiumProducts.swift */; };
@@ -71,6 +74,8 @@
 		737BBCEB27781628007A38F3 /* mappingNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mappingNetwork.swift; sourceTree = "<group>"; };
 		737BBCEC27781628007A38F3 /* mappingNetwork.mlmodelc */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = mappingNetwork.mlmodelc; sourceTree = "<group>"; };
 		FA17E71F2CD9C9A700C4CF18 /* CoreML-StyleGAN.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CoreML-StyleGAN.entitlements"; sourceTree = "<group>"; };
+		FA2B48422D088AD10022B3CE /* Float+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Ext.swift"; sourceTree = "<group>"; };
+		FA2B48472D08905A0022B3CE /* Premium.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Premium.json; sourceTree = "<group>"; };
 		FA88D8432CE4E51E00625AA6 /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		FAB8A8032C6BD0A4005F683B /* IAPViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPViewModel.swift; sourceTree = "<group>"; };
 		FAB8A8042C6BD0A4005F683B /* PremiumProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PremiumProducts.swift; sourceTree = "<group>"; };
@@ -91,6 +96,7 @@
 				FAB8A8192C6BD34B005F683B /* NVActivityIndicatorViewExtended in Frameworks */,
 				FAB8A8172C6BD34B005F683B /* NVActivityIndicatorView in Frameworks */,
 				FAB8A80D2C6BD1D9005F683B /* SwiftyStoreKit in Frameworks */,
+				FA2B48462D088FD50022B3CE /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +140,7 @@
 		737BBCB2277808C2007A38F3 /* CoreML-StyleGAN */ = {
 			isa = PBXGroup;
 			children = (
+				FA2B48472D08905A0022B3CE /* Premium.json */,
 				FA88D8422CE4E51700625AA6 /* External */,
 				FA17E71F2CD9C9A700C4CF18 /* CoreML-StyleGAN.entitlements */,
 				FAB8A80E2C6BD284005F683B /* Extensions */,
@@ -181,6 +188,7 @@
 		FAB8A8022C6BD097005F683B /* IAP */ = {
 			isa = PBXGroup;
 			children = (
+				FA2B48422D088AD10022B3CE /* Float+Ext.swift */,
 				FAB8A8052C6BD0A4005F683B /* IAPVC.swift */,
 				FAB8A8032C6BD0A4005F683B /* IAPViewModel.swift */,
 				FAB8A8062C6BD0A4005F683B /* LocalSavedPremium.swift */,
@@ -221,6 +229,7 @@
 				FAB8A80C2C6BD1D9005F683B /* SwiftyStoreKit */,
 				FAB8A8162C6BD34B005F683B /* NVActivityIndicatorView */,
 				FAB8A8182C6BD34B005F683B /* NVActivityIndicatorViewExtended */,
+				FA2B48452D088FD50022B3CE /* Lottie */,
 			);
 			productName = "CoreML-StyleGAN";
 			productReference = 737BBCB0277808C2007A38F3 /* RandomPerson.app */;
@@ -297,6 +306,7 @@
 			packageReferences = (
 				FAB8A80B2C6BD1D9005F683B /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
 				FAB8A8152C6BD34B005F683B /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
+				FA2B48442D088FD50022B3CE /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 737BBCB1277808C2007A38F3 /* Products */;
 			projectDirPath = "";
@@ -316,6 +326,7 @@
 			files = (
 				737BBCEE27781629007A38F3 /* mappingNetwork.mlmodelc in Resources */,
 				737BBCE9277815FF007A38F3 /* synthesisNetwork.mlmodelc in Resources */,
+				FA2B48482D08905A0022B3CE /* Premium.json in Resources */,
 				737BBCC0277808CB007A38F3 /* LaunchScreen.storyboard in Resources */,
 				737BBCBD277808CB007A38F3 /* Assets.xcassets in Resources */,
 				737BBCBB277808C2007A38F3 /* Main.storyboard in Resources */,
@@ -355,6 +366,7 @@
 				FAB8A8142C6BD2D9005F683B /* URL+Ext.swift in Sources */,
 				737BBCB4277808C2007A38F3 /* AppDelegate.swift in Sources */,
 				737BBCB6277808C2007A38F3 /* SceneDelegate.swift in Sources */,
+				FA2B48432D088AD90022B3CE /* Float+Ext.swift in Sources */,
 				FAB8A80A2C6BD0A4005F683B /* LocalSavedPremium.swift in Sources */,
 				FAB8A8102C6BD28E005F683B /* Ext.swift in Sources */,
 				FAB8A81B2C6BD3CE005F683B /* Loader+Ext.swift in Sources */,
@@ -536,11 +548,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "CoreML-StyleGAN/CoreML-StyleGAN.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 44AXYL9JVD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "CoreML-StyleGAN/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Ai Person";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ai Image";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "This app needs access to your photo library to save photos.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
@@ -556,7 +568,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aiPerson.ac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -575,11 +587,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "CoreML-StyleGAN/CoreML-StyleGAN.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 44AXYL9JVD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "CoreML-StyleGAN/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Ai Person";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ai Image";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "This app needs access to your photo library to save photos.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
@@ -595,7 +607,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aiPerson.ac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -725,6 +737,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FA2B48442D088FD50022B3CE /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 		FAB8A80B2C6BD1D9005F683B /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/bizz84/SwiftyStoreKit";
@@ -744,6 +764,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FA2B48452D088FD50022B3CE /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA2B48442D088FD50022B3CE /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		FAB8A80C2C6BD1D9005F683B /* SwiftyStoreKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FAB8A80B2C6BD1D9005F683B /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */;
