@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController {
     
-    func showAlert(withTitle title: String = "Hashtag", message: String? = nil, okayTitle: String = "OK", cancelTitle: String? = nil, okCall: @escaping () -> () = {}, cancelCall: @escaping () -> () = {}) {
+    func showAlert(withTitle title: String = "Random Person", message: String? = nil, okayTitle: String = "OK", cancelTitle: String? = nil, okCall: @escaping () -> () = {}, cancelCall: @escaping () -> () = {}) {
         // print(title ?? appName)
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

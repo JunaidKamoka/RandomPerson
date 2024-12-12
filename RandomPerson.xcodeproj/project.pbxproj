@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,7 @@
 		FA2B48432D088AD90022B3CE /* Float+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B48422D088AD10022B3CE /* Float+Ext.swift */; };
 		FA2B48462D088FD50022B3CE /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FA2B48452D088FD50022B3CE /* Lottie */; };
 		FA2B48482D08905A0022B3CE /* Premium.json in Resources */ = {isa = PBXBuildFile; fileRef = FA2B48472D08905A0022B3CE /* Premium.json */; };
+		FA2B484D2D09C42E0022B3CE /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FA2B484C2D09C42E0022B3CE /* IQKeyboardManagerSwift */; };
 		FA88D8442CE4E51E00625AA6 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA88D8432CE4E51E00625AA6 /* ImageSaver.swift */; };
 		FAB8A8072C6BD0A4005F683B /* IAPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB8A8032C6BD0A4005F683B /* IAPViewModel.swift */; };
 		FAB8A8082C6BD0A4005F683B /* PremiumProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB8A8042C6BD0A4005F683B /* PremiumProducts.swift */; };
@@ -88,11 +89,16 @@
 		FAB8A81C2C6BD441005F683B /* Reachablity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachablity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		FA81D9B22D09C94600074C9A /* Networking */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Networking; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		737BBCAD277808C2007A38F3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA2B484D2D09C42E0022B3CE /* IQKeyboardManagerSwift in Frameworks */,
 				FAB8A8192C6BD34B005F683B /* NVActivityIndicatorViewExtended in Frameworks */,
 				FAB8A8172C6BD34B005F683B /* NVActivityIndicatorView in Frameworks */,
 				FAB8A80D2C6BD1D9005F683B /* SwiftyStoreKit in Frameworks */,
@@ -120,10 +126,10 @@
 		737BBCA7277808C2007A38F3 = {
 			isa = PBXGroup;
 			children = (
-				737BBCB2277808C2007A38F3 /* CoreML-StyleGAN */,
 				737BBCC9277808CB007A38F3 /* CoreML-StyleGANTests */,
 				737BBCD3277808CB007A38F3 /* CoreML-StyleGANUITests */,
 				737BBCB1277808C2007A38F3 /* Products */,
+				737BBCB2277808C2007A38F3 /* CoreML-StyleGAN */,
 			);
 			sourceTree = "<group>";
 		};
@@ -140,6 +146,7 @@
 		737BBCB2277808C2007A38F3 /* CoreML-StyleGAN */ = {
 			isa = PBXGroup;
 			children = (
+				FA81D9B22D09C94600074C9A /* Networking */,
 				FA2B48472D08905A0022B3CE /* Premium.json */,
 				FA88D8422CE4E51700625AA6 /* External */,
 				FA17E71F2CD9C9A700C4CF18 /* CoreML-StyleGAN.entitlements */,
@@ -224,12 +231,16 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				FA81D9B22D09C94600074C9A /* Networking */,
+			);
 			name = RandomPerson;
 			packageProductDependencies = (
 				FAB8A80C2C6BD1D9005F683B /* SwiftyStoreKit */,
 				FAB8A8162C6BD34B005F683B /* NVActivityIndicatorView */,
 				FAB8A8182C6BD34B005F683B /* NVActivityIndicatorViewExtended */,
 				FA2B48452D088FD50022B3CE /* Lottie */,
+				FA2B484C2D09C42E0022B3CE /* IQKeyboardManagerSwift */,
 			);
 			productName = "CoreML-StyleGAN";
 			productReference = 737BBCB0277808C2007A38F3 /* RandomPerson.app */;
@@ -307,6 +318,7 @@
 				FAB8A80B2C6BD1D9005F683B /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
 				FAB8A8152C6BD34B005F683B /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
 				FA2B48442D088FD50022B3CE /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				FA2B484B2D09C42E0022B3CE /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 737BBCB1277808C2007A38F3 /* Products */;
 			projectDirPath = "";
@@ -568,9 +580,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aiPerson.ac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = NO;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -607,9 +621,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aiPerson.ac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = NO;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -745,6 +761,14 @@
 				minimumVersion = 4.5.0;
 			};
 		};
+		FA2B484B2D09C42E0022B3CE /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 		FAB8A80B2C6BD1D9005F683B /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/bizz84/SwiftyStoreKit";
@@ -768,6 +792,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA2B48442D088FD50022B3CE /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		FA2B484C2D09C42E0022B3CE /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA2B484B2D09C42E0022B3CE /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		FAB8A80C2C6BD1D9005F683B /* SwiftyStoreKit */ = {
 			isa = XCSwiftPackageProductDependency;
