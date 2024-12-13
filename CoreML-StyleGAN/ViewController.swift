@@ -124,47 +124,6 @@ class ViewController: UIViewController {
         
     }
     
-    func runMobileStyleGAN() {
-        do {
-            
-            // Mapping
-            
-            let mappingNetwork = try mappingNetwork(configuration: MLModelConfiguration())
-            let input = try MLMultiArray(shape: [1,512] as [NSNumber], dataType: MLMultiArrayDataType.float32)
-            
-            for i in 0...input.count - 1 {
-                input[i] = NSNumber(value: Float32.random(in: -1...1))
-            }
-            let mappingInput = mappingNetworkInput(var_: input)
-            
-            let mappingOutput = try mappingNetwork.prediction(input: mappingInput)
-            let style = mappingOutput.var_134
-            
-            // Synthesis
-            
-            let synthesisNetwork = try synthesisNetwork(configuration: MLModelConfiguration())
-            
-            let mlinput = synthesisNetworkInput(style: style)
-            let output = try synthesisNetwork.prediction(input: mlinput)
-            let buffer = output.activation_out
-            let ciImage = CIImage(cvPixelBuffer: buffer)
-            guard let safeCGImage = ciContext.createCGImage(ciImage, from: ciImage.extent) else { print("Could not create cgimage."); return}
-            let image = UIImage(cgImage: safeCGImage)
-            
-            UIView.transition(with: imageView,
-                              duration: 0.5, // Animation duration
-                              options: .transitionCrossDissolve, // Smooth fade effect
-                              animations: {
-                self.imageView.image = image
-            },
-                              completion: nil)
-            outputImage = image
-            
-        } catch let error {
-            fatalError("\(error)")
-        }
-    }
-    
     @IBAction func btnPremium() {
         
         let iapVC = self.storyboard?.instantiateViewController(withIdentifier: IAPVC.className) as! IAPVC
@@ -175,7 +134,6 @@ class ViewController: UIViewController {
     @IBAction func runAgainButtonTapped(_ sender: UIButton) {
         
                 guard IAPViewModel.shared.canProceed() == true else {return}
-        //        self.runMobileStyleGAN()
         
         guard let promptText = promptTF.text, !promptText.isEmpty else {
                // Show alert if the prompt is empty

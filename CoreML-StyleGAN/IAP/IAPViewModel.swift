@@ -38,7 +38,7 @@ class IAPViewModel: NSObject {
 //        return true
 //#endif
         let currentTries = UserDefaults.standard.integer(forKey: "freeTries")
-        if currentTries > 0 {
+        if currentTries > 1 {
             
             topVC?.present(iapVC, animated: true)
             return false
