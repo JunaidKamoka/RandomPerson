@@ -178,6 +178,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnPremiumOutlet" destination="puI-ui-3ch" id="VFS-Ab-Bdl"/>
                         <outlet property="imageView" destination="fyp-5v-Aed" id="9Jk-fB-piu"/>
                         <outlet property="premiumLottieView" destination="ZXI-HV-pP5" id="qID-lf-3OS"/>
                         <outlet property="promptTF" destination="kPA-i2-7nx" id="wik-xk-jJe"/>

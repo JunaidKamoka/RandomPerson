@@ -34,11 +34,11 @@ class IAPViewModel: NSObject {
         let iapVC = topVC?.storyboard?.instantiateViewController(withIdentifier: IAPVC.className) as! IAPVC
         iapVC.modalPresentationStyle = .fullScreen
         
-//#if DEBUG || TESTFLIGHT
-//        return true
-//#endif
+#if DEBUG || TESTFLIGHT
+        return true
+#endif
         let currentTries = UserDefaults.standard.integer(forKey: "freeTries")
-        if currentTries > 1 {
+        if currentTries > 3 {
             
             topVC?.present(iapVC, animated: true)
             return false

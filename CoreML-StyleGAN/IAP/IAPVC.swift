@@ -287,15 +287,17 @@ extension IAPVC: UITableViewDelegate, UITableViewDataSource {
                 
         if currentProduct?.productID == PremiumProducts.weeklySub {
             
-            cell.priceLbl.text = "\(currentProduct?.currancy ?? "") \(((currentProduct?.price ?? 0.0)/7).rounded(toPlaces: 1))"
-            cell.durationLbl.text = "per day"
-            cell.descPriceLbl.text = (currentProduct?.priceDesc ?? "") + " paid weekly"
+            cell.priceLbl.text = (currentProduct?.priceDesc ?? "")//"\(currentProduct?.currancy ?? "") \(((currentProduct?.price ?? 0.0)/7).rounded(toPlaces: 1))"
+//            cell.durationLbl.text = "per day"
+            cell.descPriceLbl.text = "\(currentProduct?.currancy ?? "") \(((currentProduct?.price ?? 0.0)/7).rounded(toPlaces: 1))" + " per day"
             cell.discountLbl.text = "Save 60%"
+            
+            cell.durationLbl.text = "Paid Weekly"
         } else if currentProduct?.productID == PremiumProducts.yearlySub {
             
-            cell.priceLbl.text = "\(currentProduct?.currancy ?? "") \(((currentProduct?.price ?? 0.0)/12).rounded(toPlaces: 1))"
-            cell.durationLbl.text = "per month"
-            cell.descPriceLbl.text = (currentProduct?.priceDesc ?? "") + " paid yearly"
+            cell.priceLbl.text = (currentProduct?.priceDesc ?? "")
+            cell.durationLbl.text = "Paid Yearly"
+            cell.descPriceLbl.text = "\(currentProduct?.currancy ?? "") \(((currentProduct?.price ?? 0.0)/12).rounded(toPlaces: 1))" + " per month"
             cell.discountLbl.text = "Save 70%"
         }
         

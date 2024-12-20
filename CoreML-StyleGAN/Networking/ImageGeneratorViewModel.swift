@@ -7,11 +7,12 @@
 
 
 import Foundation
-
 import UIKit
 
 class ImageGeneratorViewModel {
-    private let apiKey = "key-4mQccgCKzrjos6y2ycYL27JAdSdCYGh6d8NUWPiRP3MNqf0o8ytsMxjgP1yPISFVCjgzdHr2TaI7AhxXfKIPOYgyFslRzbpc"
+    
+    let apiKey = Bundle.main.object(forInfoDictionaryKey: "ApiKey") as! String
+
     private let apiURL = "https://api.getimg.ai/v1/flux-schnell/text-to-image"
     
     var onImageDownloaded: ((UIImage?) -> Void)?

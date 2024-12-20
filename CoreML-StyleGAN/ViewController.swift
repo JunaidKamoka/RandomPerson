@@ -29,9 +29,6 @@ class ViewController: UIViewController {
         blurView.translatesAutoresizingMaskIntoConstraints = false
         return blurView
     }()
-    // For save image
-    var outputImage: UIImage?
-    var ciContext = CIContext()
     
     private var isShowed = false
     
